@@ -1,5 +1,5 @@
 {
-  "name": "ecme-next",
+  "name": "reabilis-next",
   "version": "1.2.1",
   "private": true,
   "scripts": {
@@ -110,6 +110,10 @@
     },
     "react-syntax-highlighter": {
       "prismjs": "1.30.0"
-    }
+    },
+    "resolutions": {
+    "**/@types/react": "18.2.27",
+    "**/@types/react-dom": "18.2.4"
+  }
   }
 }
