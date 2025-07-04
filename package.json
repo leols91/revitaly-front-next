@@ -1,5 +1,5 @@
 {
-  "name": "reabilis-next",
+  "name": "ecme-next",
   "version": "1.2.1",
   "private": true,
   "scripts": {
@@ -9,9 +9,6 @@
     "lint": "next lint",
     "prettier": "npx prettier src --check",
     "prettier:fix": "npm run prettier -- --write"
-  },
-  "engines": {
-    "node": "20.x"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.2",
@@ -29,7 +26,6 @@
     "@tiptap/react": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
     "@visx/pattern": "^3.13.0-alpha.0",
-    "apexcharts": "^4.7.0",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "d3-dsv": "^3.0.1",
@@ -110,10 +106,6 @@
     },
     "react-syntax-highlighter": {
       "prismjs": "1.30.0"
-    },
-    "resolutions": {
-    "/@types/react": "18.2.27",
-    "/@types/react-dom": "18.2.4"
-  }
+    }
   }
 }
