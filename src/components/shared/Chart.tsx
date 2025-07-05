@@ -10,9 +10,9 @@ import {
 } from '@/configs/chart.config'
 import { DIR_RTL } from '@/constants/theme.constant'
 import dynamic from 'next/dynamic'
-import type { ApexOptions } from 'apexcharts'
 import type { Direction } from '@/@types/theme'
 import type { ReactNode, Ref } from 'react'
+import { ApexOptions } from 'apexcharts'
 
 const notDonut = ['line', 'bar', 'area']
 

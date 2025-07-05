@@ -10,6 +10,10 @@
     "prettier": "npx prettier src --check",
     "prettier:fix": "npm run prettier -- --write"
   },
+  "resolutions": {
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2"
+  },
   "dependencies": {
     "@floating-ui/react": "^0.27.2",
     "@fullcalendar/core": "^6.1.15",
@@ -94,8 +98,6 @@
     "typescript": "^5"
   },
   "overrides": {
-    "@types/react": "19.0.2",
-    "@types/react-dom": "19.0.2",
     "gantt-task-react": {
       "react": "19.0.0",
       "react-dom": "19.0.0"

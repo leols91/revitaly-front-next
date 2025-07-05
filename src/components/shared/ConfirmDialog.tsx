@@ -1,28 +1,34 @@
-import {
-    HiCheckCircle,
-    HiOutlineInformationCircle,
-    HiOutlineExclamation,
-    HiOutlineExclamationCircle,
-} from 'react-icons/hi'
+import React, { PropsWithChildren, ReactNode } from 'react'
+import type { DialogProps as BaseDialogProps } from '@/components/ui/Dialog'
+import type { ButtonProps } from '@/components/ui/Button'
 import Avatar from '@/components/ui/Avatar'
 import Button from '@/components/ui/Button'
 import Dialog from '@/components/ui/Dialog'
-import type { ReactNode } from 'react'
-import type { DialogProps } from '@/components/ui/Dialog'
-import type { ButtonProps } from '@/components/ui/Button'
+import {
+  HiCheckCircle,
+  HiOutlineInformationCircle,
+  HiOutlineExclamation,
+  HiOutlineExclamationCircle,
+} from 'react-icons/hi'
 
 type StatusType = 'info' | 'success' | 'warning' | 'danger'
 
-interface ConfirmDialogProps extends DialogProps {
-    cancelText?: ReactNode | string
-    confirmText?: ReactNode | string
-    confirmButtonProps?: ButtonProps
-    cancelButtonProps?: ButtonProps
-    type?: StatusType
-    title?: ReactNode | string
-    onCancel?: () => void
-    onConfirm?: () => void
+interface ConfirmDialogOwnProps {
+  cancelText?: ReactNode
+  confirmText?: ReactNode
+  confirmButtonProps?: ButtonProps
+  cancelButtonProps?: ButtonProps
+  type?: StatusType
+  title?: ReactNode
+  onCancel?: () => void
+  onConfirm?: () => void
 }
+
+// Aqui usamos PropsWithChildren para injetar children tipado corretamente:
+export type ConfirmDialogProps =
+  PropsWithChildren<
+    Omit<BaseDialogProps, 'children'> & ConfirmDialogOwnProps
+  >
 
 const StatusIcon = ({ status }: { status: StatusType }) => {
     switch (status) {
@@ -76,60 +82,44 @@ const StatusIcon = ({ status }: { status: StatusType }) => {
     }
 }
 
-const ConfirmDialog = (props: ConfirmDialogProps) => {
-    const {
-        type = 'info',
-        title,
-        children,
-        onCancel,
-        onConfirm,
-        cancelText = 'Cancel',
-        confirmText = 'Confirm',
-        confirmButtonProps,
-        cancelButtonProps,
-        ...rest
-    } = props
+const ConfirmDialog = ({
+  type = 'info',
+  title,
+  children,
+  onCancel,
+  onConfirm,
+  cancelText = 'Cancel',
+  confirmText = 'Confirm',
+  confirmButtonProps,
+  cancelButtonProps,
+  ...rest
+}: ConfirmDialogProps) => {
+  const handleCancel = () => onCancel?.()
+  const handleConfirm = () => onConfirm?.()
 
-    const handleCancel = () => {
-        onCancel?.()
-    }
-
-    const handleConfirm = () => {
-        onConfirm?.()
-    }
-
-    return (
-        <Dialog contentClassName="pb-0 px-0" {...rest}>
-            <div className="px-6 pb-6 pt-2 flex">
-                <div>
-                    <StatusIcon status={type} />
-                </div>
-                <div className="ml-4 rtl:mr-4">
-                    <h5 className="mb-2">{title}</h5>
-                    {children}
-                </div>
-            </div>
-            <div className="px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-bl-2xl rounded-br-2xl">
-                <div className="flex justify-end items-center gap-2">
-                    <Button
-                        size="sm"
-                        onClick={handleCancel}
-                        {...cancelButtonProps}
-                    >
-                        {cancelText}
-                    </Button>
-                    <Button
-                        size="sm"
-                        variant="solid"
-                        onClick={handleConfirm}
-                        {...confirmButtonProps}
-                    >
-                        {confirmText}
-                    </Button>
-                </div>
-            </div>
-        </Dialog>
-    )
+  return (
+    <Dialog contentClassName="pb-0 px-0" {...rest}>
+      <div className="px-6 pb-6 pt-2 flex">
+        <div>
+          <StatusIcon status={type} />
+        </div>
+        <div className="ml-4 rtl:mr-4">
+          <h5 className="mb-2">{title}</h5>
+          {children}
+        </div>
+      </div>
+      <div className="px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-bl-2xl rounded-br-2xl">
+        <div className="flex justify-end items-center gap-2">
+          <Button size="sm" onClick={handleCancel} {...cancelButtonProps}>
+            {cancelText}
+          </Button>
+          <Button size="sm" variant="solid" onClick={handleConfirm} {...confirmButtonProps}>
+            {confirmText}
+          </Button>
+        </div>
+      </div>
+    </Dialog>
+  )
 }
 
 export default ConfirmDialog

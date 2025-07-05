@@ -15,9 +15,20 @@ const eslintConfig = [
     rules: {
       "@typescript-eslint/no-unused-expressions": "off",
       "@next/next/no-img-element": "off",
-      "react-hooks/rules-of-hooks": "off"
+      "react-hooks/rules-of-hooks": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     },
   },
 ];
+
+overrides: [
+    // já pode haver outros overrides
+    {
+      files: ["src/types/**/*.d.ts"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
 
 export default eslintConfig;
