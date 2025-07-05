@@ -29,17 +29,17 @@ interface SignInFormProps extends CommonProps {
 }
 
 type SignInFormSchema = {
-    email: string
+    login: string
     password: string
 }
 
 const validationSchema: ZodType<SignInFormSchema> = z.object({
-    email: z
-        .string({ required_error: 'Please enter your email' })
-        .min(1, { message: 'Please enter your email' }),
+    login: z
+        .string({ required_error: 'Insira o seu login' })
+        .min(1, { message: 'Insira o seu login' }),
     password: z
-        .string({ required_error: 'Please enter your password' })
-        .min(1, { message: 'Please enter your password' }),
+        .string({ required_error: 'Insira a sua senha' })
+        .min(1, { message: 'Insira a sua senha' }),
 })
 
 const SignInForm = (props: SignInFormProps) => {
@@ -53,8 +53,6 @@ const SignInForm = (props: SignInFormProps) => {
         control,
     } = useForm<SignInFormSchema>({
         defaultValues: {
-            email: 'admin-01@ecme.com',
-            password: '123Qwe',
         },
         resolver: zodResolver(validationSchema),
     })
@@ -69,17 +67,16 @@ const SignInForm = (props: SignInFormProps) => {
         <div className={className}>
             <Form onSubmit={handleSubmit(handleSignIn)}>
                 <FormItem
-                    label="Email"
-                    invalid={Boolean(errors.email)}
-                    errorMessage={errors.email?.message}
+                    label="Login"
+                    invalid={Boolean(errors.login)}
+                    errorMessage={errors.login?.message}
                 >
                     <Controller
-                        name="email"
+                        name="login"
                         control={control}
                         render={({ field }) => (
                             <Input
-                                type="email"
-                                placeholder="Email"
+                                type="text"
                                 autoComplete="off"
                                 {...field}
                             />
@@ -87,7 +84,7 @@ const SignInForm = (props: SignInFormProps) => {
                     />
                 </FormItem>
                 <FormItem
-                    label="Password"
+                    label="Senha"
                     invalid={Boolean(errors.password)}
                     errorMessage={errors.password?.message}
                     className={classNames(
@@ -102,7 +99,6 @@ const SignInForm = (props: SignInFormProps) => {
                         render={({ field }) => (
                             <PasswordInput
                                 type="text"
-                                placeholder="Password"
                                 autoComplete="off"
                                 {...field}
                             />

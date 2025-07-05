@@ -24,6 +24,7 @@ chrome-user-data
 *.swp
 *.swo
 .env
+.env.local
 next build / cache
 .next 
 
